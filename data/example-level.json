@@ -1,0 +1,18 @@
+{
+    "id": 0,
+    "name": "Reallocation",
+    "author": "Zyfr 🇳🇴",
+    "creators": ["Zyfr 🇳🇴"],
+    "verifier": "Zyfr 🇳🇴",
+    "verification": "https://youtu.be/0F2Eyw2OQNY",
+    "percentToQualify": 100,
+    "password": "Free to Copy",
+    "records": [
+        {
+            "user": "Zyfr 🇳🇴",
+            "link": "#",
+            "percent": 22.4,
+            "hz": 480
+        }
+    ]
+}
