@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Record - Demon List</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/list.css">
+    <style>
+        /* Custom layout additions to fit your exact template classes */
+        body {
+            background-color: var(--color-background, #121212);
+            color: var(--color-on-background, #ffffff);
+            font-family: inherit;
+        }
+        .page-list {
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .page-list .level-container .level form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .page-list .level-container .level input {
+            background-color: var(--color-background, #1e1e1e);
+            color: var(--color-on-background, #ffffff);
+            border: 1px solid var(--color-border, #333);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .page-list .level-container .level input:focus {
+            outline: none;
+            border-color: var(--color-primary, #e74c3c);
+        }
+        .page-list .level-container .level button {
+            background-color: var(--color-primary, #e74c3c);
+            color: var(--color-on-primary, #ffffff);
+            border: none;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background 0.2s;
+        }
+        .page-list .level-container .level button:hover {
+            background-color: var(--color-background-hover, #c0392b);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-list">
+        <main class="level-container">
+            <div class="level">
+                <h2>Submit Record</h2>
+                <p style="color: var(--color-subtext, #aaa); margin: 0;">Fill out the details below to send your record straight to the moderation team via Discord.</p>
+                
+                <form id="recordForm">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.85rem;">Player Name</label>
+                        <input type="text" id="playerName" placeholder="e.g. SpaceUK" required>
+                    </div>
+
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.85rem;">Country Code (2 letters)</label>
+                        <input type="text" id="playerCountry" placeholder="e.g. US, UK, FR" maxlength="2" required>
+                    </div>
+
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.85rem;">Level Name</label>
+                        <input type="text" id="levelName" placeholder="e.g. Bloodbath" required>
+                    </div>
+
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.85rem;">YouTube Video Proof Link</label>
+                        <input type="url" id="videoProof" placeholder="https://youtu.be/..." required>
+                    </div>
+
+                    <button type="submit">Submit to Mods</button>
+                </form>
+                
+                <p id="statusMsg" style="text-align: center; font-weight: bold; margin-top: 1rem;"></p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('recordForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // ⚠️ PASTE YOUR DISCORD WEBHOOK URL INSIDE THESE QUOTES:
+            const webhookURL = "YOUR_DISCORD_WEBHOOK_URL_HERE";
+
+            const name = document.getElementById('playerName').value;
+            const country = document.getElementById('playerCountry').value.toUpperCase();
+            const level = document.getElementById('levelName').value;
+            const video = document.getElementById('videoProof').value;
+            const statusMsg = document.getElementById('statusMsg');
+
+            const payload = {
+                username: "Demon List Bot",
+                embeds: [{
+                    title: "🎮 New Record Submission",
+                    color: 15158332,
+                    fields: [
+                        { name: "👤 Player", value: name, inline: true },
+                        { name: "🌍 Country", value: country, inline: true },
+                        { name: "🔥 Level", value: level, inline: false },
+                        { name: "🎥 Video Proof", value: `[Watch Proof](${video})`, inline: false }
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            statusMsg.style.color = "var(--color-primary, #f1c40f)";
+            statusMsg.innerText = "Transmitting record...";
+
+            try {
+                let response = await fetch(webhookURL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    statusMsg.style.color = "var(--color-success, #2ecc71)";
+                    statusMsg.innerText = "Success! Your record has been sent to the mods.";
+                    document.getElementById('recordForm').reset();
+                } else {
+                    throw new Error();
+                }
+            } catch (error) {
+                statusMsg.style.color = "var(--color-error, #e74c3c)";
+                statusMsg.innerText = "Failed to send. Check your webhook URL!";
+            }
+        });
+    </script>
+</body>
+</html>
