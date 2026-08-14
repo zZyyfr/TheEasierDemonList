@@ -1,144 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Submit Record - Demon List</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/list.css">
-    <style>
-        /* Custom layout additions to fit your exact template classes */
-        body {
-            background-color: var(--color-background, #121212);
-            color: var(--color-on-background, #ffffff);
-            font-family: inherit;
-        }
-        .page-list {
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        .page-list .level-container .level form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        .page-list .level-container .level input {
-            background-color: var(--color-background, #1e1e1e);
-            color: var(--color-on-background, #ffffff);
-            border: 1px solid var(--color-border, #333);
-            border-radius: 0.5rem;
-            padding: 1rem;
-            font-size: 1rem;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .page-list .level-container .level input:focus {
-            outline: none;
-            border-color: var(--color-primary, #e74c3c);
-        }
-        .page-list .level-container .level button {
-            background-color: var(--color-primary, #e74c3c);
-            color: var(--color-on-primary, #ffffff);
-            border: none;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            text-align: center;
-            cursor: pointer;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: background 0.2s;
-        }
-        .page-list .level-container .level button:hover {
-            background-color: var(--color-background-hover, #c0392b);
-        }
-    </style>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=1024" />
+        <title>Submit Record - The Easier Demon List</title>
 
-    <div class="page-list">
-        <main class="level-container">
-            <div class="level">
+        <link rel="icon" href="/list_icon.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@500;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="/css/typography.css" />
+        <link rel="stylesheet" type="text/css" href="/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="/css/pages/list.css" />
+        <link rel="stylesheet" type="text/css" href="/css/components/nav.css" />
+        <link rel="stylesheet" type="text/css" href="/css/components/btn.css" />
+        
+        <script src="https://unpkg.com/vue@3.2.31/dist/vue.global.js"></script>
+        <script type="module" src="/js/main.js"></script>
+
+        <style>
+            .submit-wrapper {
+                display: flex;
+                justify-content: center;
+                padding: 4rem 1rem;
+            }
+            .submit-box {
+                background-color: var(--color-background, #1e1e1e);
+                color: var(--color-on-background, #fff);
+                padding: 2.5rem;
+                border-radius: 0.5rem;
+                width: 100%;
+                max-width: 48rem;
+                box-sizing: border-box;
+                border: 1px solid var(--color-border, #333);
+            }
+            .submit-box h2 {
+                margin-bottom: 0.5rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+            .submit-box p {
+                color: var(--color-subtext, #aaa);
+                margin-bottom: 2rem;
+                font-size: 0.95rem;
+            }
+            .submit-box form {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .submit-box label {
+                display: block;
+                margin-bottom: 0.5rem;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                font-weight: bold;
+            }
+            .submit-box input {
+                background-color: var(--color-background-hover, #2a2a2a);
+                color: var(--color-on-background, #fff);
+                border: 1px solid var(--color-border, #444);
+                border-radius: 0.5rem;
+                padding: 1rem;
+                font-size: 1rem;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .submit-box input:focus {
+                outline: none;
+                border-color: var(--color-primary, #e74c3c);
+            }
+            .submit-box button {
+                background-color: var(--color-primary, #e74c3c);
+                color: var(--color-on-primary, #fff);
+                border: none;
+                border-radius: 0.5rem;
+                padding: 1rem;
+                text-align: center;
+                cursor: pointer;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                transition: background 0.2s;
+            }
+            .submit-box button:hover {
+                background-color: var(--color-background-hover, #c0392b);
+            }
+        </style>
+    </head>
+    <body id="app">
+        <header :class="{ dark: store.dark }">
+            <div class="logo">
+                <h2>The Easier Demon List</h2>
+                <p>v1.0.0</p>
+            </div>
+            <nav class="nav">
+                <router-link class="nav__tab" to="/">
+                    <span class="type-label-lg">List</span>
+                </router-link>
+                <router-link class="nav__tab" to="/leaderboard">
+                    <span class="type-label-lg">Leaderboard</span>
+                </router-link>
+                <router-link class="nav__tab" to="/roulette">
+                    <span class="type-label-lg">Roulette</span>
+                </router-link>
+                <div class="nav__actions">
+                    <button class="nav__icon" @click.prevent="store.toggleDark()">
+                        <img :src="store.dark ? '/assets/light.svg' : '/assets/dark.svg'" alt="" />
+                    </button>
+                    <a class="nav__icon" href="#">
+                        <img src="/assets/discord.svg" alt="Discord Logo" />
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <div class="submit-wrapper" :class="{ dark: store.dark }">
+            <div class="submit-box">
                 <h2>Submit Record</h2>
-                <p style="color: var(--color-subtext, #aaa); margin: 0;">Fill out the details below to send your record straight to the moderation team via Discord.</p>
+                <p>Fill out your completion details below. It will be sent straight to the moderators.</p>
                 
                 <form id="recordForm">
                     <div>
-                        <label style="display: block; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.85rem;">Player Name</label>
+                        <label>Player Name</label>
                         <input type="text" id="playerName" placeholder="e.g. SpaceUK" required>
                     </div>
 
                     <div>
-                        <label style="display: block; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.85rem;">Country Code (2 letters)</label>
+                        <label>Country Code (2 letters)</label>
                         <input type="text" id="playerCountry" placeholder="e.g. US, UK, FR" maxlength="2" required>
                     </div>
 
                     <div>
-                        <label style="display: block; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.85rem;">Level Name</label>
+                        <label>Level Name</label>
                         <input type="text" id="levelName" placeholder="e.g. Bloodbath" required>
                     </div>
 
                     <div>
-                        <label style="display: block; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.85rem;">YouTube Video Proof Link</label>
+                        <label>YouTube Video Proof Link</label>
                         <input type="url" id="videoProof" placeholder="https://youtu.be/..." required>
                     </div>
 
                     <button type="submit">Submit to Mods</button>
                 </form>
                 
-                <p id="statusMsg" style="text-align: center; font-weight: bold; margin-top: 1rem;"></p>
+                <p id="statusMsg" style="text-align: center; font-weight: bold; margin-top: 1.5rem;"></p>
             </div>
-        </main>
-    </div>
+        </div>
 
-    <script>
-        document.getElementById('recordForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const webhookURL = "https://discord.com/api/webhooks/1537810912507854898/rRulEx0vRXEajDjw1nI4zof-62zSlIyD0t206sAqGTlzocz4VA06NDXSwimRTdMwqu6i";
+        <script>
+            document.getElementById('recordForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
 
-            const name = document.getElementById('playerName').value;
-            const country = document.getElementById('playerCountry').value.toUpperCase();
-            const level = document.getElementById('levelName').value;
-            const video = document.getElementById('videoProof').value;
-            const statusMsg = document.getElementById('statusMsg');
+                // ⚠️ PASTE YOUR DISCORD WEBHOOK URL HERE:
+                const webhookURL = "https://discord.com/api/webhooks/1537810912507854898/rRulEx0vRXEajDjw1nI4zof-62zSlIyD0t206sAqGTlzocz4VA06NDXSwimRTdMwqu6i";
 
-            const payload = {
-                username: "Demon List Bot",
-                embeds: [{
-                    title: "🎮 New Record Submission",
-                    color: 15158332,
-                    fields: [
-                        { name: "👤 Player", value: name, inline: true },
-                        { name: "🌍 Country", value: country, inline: true },
-                        { name: "🔥 Level", value: level, inline: false },
-                        { name: "🎥 Video Proof", value: `[Watch Proof](${video})`, inline: false }
-                    ],
-                    timestamp: new Date().toISOString()
-                }]
-            };
+                const name = document.getElementById('playerName').value;
+                const country = document.getElementById('playerCountry').value.toUpperCase();
+                const level = document.getElementById('levelName').value;
+                const video = document.getElementById('videoProof').value;
+                const statusMsg = document.getElementById('statusMsg');
 
-            statusMsg.style.color = "var(--color-primary, #f1c40f)";
-            statusMsg.innerText = "Transmitting record...";
+                const payload = {
+                    username: "Demon List Bot",
+                    embeds: [{
+                        title: "🎮 New Record Submission",
+                        color: 15158332,
+                        fields: [
+                            { name: "👤 Player", value: name, inline: true },
+                            { name: "🌍 Country", value: country, inline: true },
+                            { name: "🔥 Level", value: level, inline: false },
+                            { name: "🎥 Video Proof", value: `[Watch Proof](${video})`, inline: false }
+                        ],
+                        timestamp: new Date().toISOString()
+                    }]
+                };
 
-            try {
-                let response = await fetch(webhookURL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
+                statusMsg.style.color = "#f1c40f";
+                statusMsg.innerText = "Transmitting record...";
 
-                if (response.ok) {
-                    statusMsg.style.color = "var(--color-success, #2ecc71)";
-                    statusMsg.innerText = "Success! Your record has been sent to the mods.";
-                    document.getElementById('recordForm').reset();
-                } else {
-                    throw new Error();
+                try {
+                    let response = await fetch(webhookURL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        statusMsg.style.color = "#2ecc71";
+                        statusMsg.innerText = "Success! Your record has been sent to the mods.";
+                        document.getElementById('recordForm').reset();
+                    } else {
+                        throw new Error();
+                    }
+                } catch (error) {
+                    statusMsg.style.color = "#e74c3c";
+                    statusMsg.innerText = "Failed to send. Check your webhook URL!";
                 }
-            } catch (error) {
-                statusMsg.style.color = "var(--color-error, #e74c3c)";
-                statusMsg.innerText = "Failed to send. Check your webhook URL!";
-            }
-        });
-    </script>
-</body>
+            });
+        </script>
+    </body>
 </html>
