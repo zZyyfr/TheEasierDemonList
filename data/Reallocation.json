@@ -5,6 +5,14 @@
     "creators": ["Zyfr 🇳🇴"],
     "verifier": "Zyfr 🇳🇴",
     "verification": "https://youtu.be/0F2Eyw2OQNY",
-    "percentToQualify": 100,
-    "password": "Free to Copy"
+    "percentToQualify": 20,
+    "password": "Free to Copy",
+    "records": [
+        {
+            "user": "XSEN",
+            "link": "#",
+            "percent":20 ,
+            "hz": 60
+        }
+    ]
 }
