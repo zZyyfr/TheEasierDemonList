@@ -126,6 +126,11 @@
                     </div>
 
                     <div>
+                        <label>Discord Username</label>
+                        <input type="text" id="discordName" placeholder="e.g. username" required>
+                    </div>
+
+                    <div>
                         <label>Country Code (2 letters)</label>
                         <input type="text" id="playerCountry" placeholder="e.g. US, UK, FR" maxlength="2" required>
                     </div>
@@ -155,6 +160,7 @@
                 const webhookURL = "https://discord.com/api/webhooks/1537810912507854898/rRulEx0vRXEajDjw1nI4zof-62zSlIyD0t206sAqGTlzocz4VA06NDXSwimRTdMwqu6i";
 
                 const name = document.getElementById('playerName').value;
+                const discord = document.getElementById('discordName').value;
                 const country = document.getElementById('playerCountry').value.toUpperCase();
                 const level = document.getElementById('levelName').value;
                 const video = document.getElementById('videoProof').value;
@@ -167,6 +173,7 @@
                         color: 15158332,
                         fields: [
                             { name: "👤 Player", value: name, inline: true },
+                            { name: "💬 Discord", value: discord, inline: true },
                             { name: "🌍 Country", value: country, inline: true },
                             { name: "🔥 Level", value: level, inline: false },
                             { name: "🎥 Video Proof", value: `[Watch Proof](${video})`, inline: false }
