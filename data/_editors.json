@@ -1,12 +1,17 @@
 [
     {
         "role": "owner",
-        "name": "Zyfr",
+        "name": "Owner",
         "link": "https://www.youtube.com/@zZyfr"
     },
     {
         "role": "dev",
-        "name": "List Coder",
+        "name": "List Coder(forked)",
+        "link": "https://www.youtube.com/@zZyfr"
+    },
+    {
+        "role": "dev",
+        "name": "Actual Dev",
         "link": "https://www.youtube.com/@Prometheus_Alt"
     }
 ]
