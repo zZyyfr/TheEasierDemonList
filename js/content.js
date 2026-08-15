@@ -18,9 +18,9 @@ export async function fetchList() {
                         {
                             ...level,
                             path,
-                            records: (level.records || []).sort(
-                                (a, b) => b.percent - a.percent,
-                            ),
+                            records: Array.isArray(level.records) 
+                                ? level.records.sort((a, b) => b.percent - a.percent) 
+                                : [],
                         },
                         null,
                     ];
@@ -48,16 +48,18 @@ export async function fetchEditors() {
 
 export async function fetchLeaderboard() {
     const list = await fetchList();
+    if (!list) return [[], ["Failed to load list"]];
 
     const scoreMap = {};
     const errs = [];
+
     list.forEach(([level, err], rank) => {
-        if (err) {
-            errs.push(err);
+        if (err || !level) {
+            if (err) errs.push(err);
             return;
         }
 
-        // Verification (Only process if verifier is valid and not None/Unknown)
+        // Verification (Safeguard check for None/Unknown/Blank)
         if (level.verifier) {
             const verifierName = level.verifier.trim();
             const lowerVerifier = verifierName.toLowerCase();
@@ -72,8 +74,7 @@ export async function fetchLeaderboard() {
                     completed: [],
                     progressed: [],
                 };
-                const { verified } = scoreMap[verifier];
-                verified.push({
+                scoreMap[verifier].verified.push({
                     rank: rank + 1,
                     level: level.name,
                     score: score(rank + 1, 100, level.percentToQualify),
@@ -82,17 +83,22 @@ export async function fetchLeaderboard() {
             }
         }
 
-        // Records (Safeguard check if records array is empty/undefined)
+        // Records (Safeguard check so it never crashes if 'user' is missing)
         if (level.records && Array.isArray(level.records)) {
             level.records.forEach((record) => {
+                if (!record || !record.user) return; // Skip invalid records safely
+
+                const userName = record.user.trim();
                 const user = Object.keys(scoreMap).find(
-                    (u) => u.toLowerCase() === record.user.toLowerCase(),
-                ) || record.user;
+                    (u) => u.toLowerCase() === userName.toLowerCase(),
+                ) || userName;
+
                 scoreMap[user] ??= {
                     verified: [],
                     completed: [],
                     progressed: [],
                 };
+
                 const { completed, progressed } = scoreMap[user];
                 if (record.percent === 100) {
                     completed.push({
@@ -120,7 +126,7 @@ export async function fetchLeaderboard() {
         const { verified, completed, progressed } = scores;
         const total = [verified, completed, progressed]
             .flat()
-            .reduce((prev, cur) => prev + cur.score, 0);
+            .reduce((prev, cur) => prev + (cur.score || 0), 0);
 
         return {
             user,
