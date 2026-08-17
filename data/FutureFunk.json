@@ -1,1 +1,24 @@
-
+{
+    "id": 44062068,
+    "name": "Future Funk",
+    "author": "JonathanGD 🇮🇩",
+    "creators": ["JonathanGD 🇮🇩"],
+    "verifier": "None",
+    "verification": "https://www.youtube.com/watch?v=558Ns3ao3As",
+    "percentToQualify": 10,
+    "password": "701013",
+    "records": [
+        {
+            "user": "Zyfr 🇳🇴",
+            "link": "#",
+            "percent": 12,
+            "hz": 480
+        },
+        {
+            "user": "Carbon4814 🇭🇺",
+            "link": "#",
+            "percent": 67,
+            "hz": 60
+        }
+    ]
+}
