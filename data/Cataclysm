@@ -1,0 +1,18 @@
+{
+    "id": 3979721,
+    "name": "Cataclysm",
+    "author": "GGBoy",
+    "creators": ["GGBoy"],
+    "verifier": "None",
+    "verification": "https://www.youtube.com/watch?v=J90L73YOR3k",
+    "percentToQualify": 36,
+    "password": "000000",
+    "records": [
+        {
+            "user": "DiGiTaLgD23",
+            "link": "https://medal.tv/games/geometry-dash/clips/nsv1t3NIQ6d2xSXD-?invite=cr-MSw3Mm0sNDQ0NjI4Njcy",
+            "percent": 100,
+            "hz": 60
+        }
+    ]
+}
