@@ -1,1 +1,18 @@
-
+{
+    "id": 6939821,
+    "name": "Jawbreaker",
+    "author": "ZenthicAlpha",
+    "creators": ["ZenthicAlpha"],
+    "verifier": "None",
+    "verification": "",
+    "percentToQualify": 100,
+    "password": "",
+    "records": [
+        {
+            "user": "DOPROBenceGD",
+            "link": "https://medal.tv/games/geometry-dash/clips/nsv8qAn79VSp0R3tl?invite=cr-MSxwSGgsNjU1NTYwNjMz",
+            "percent": 100,
+            "hz": 60
+        }
+    ]
+}
