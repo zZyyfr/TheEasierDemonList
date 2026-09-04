@@ -1,0 +1,18 @@
+{
+    "id": 0,
+    "name": "Sweater Weather",
+    "author": "VelYT",
+    "creators": ["VelYT"],
+    "verifier": "None",
+    "verification": "",
+    "percentToQualify": 50,
+    "password": "",
+    "records": [
+        {
+            "user": "DiGiTaLgD23",
+            "link": "https://medal.tv/games/geometry-dash/clips/nsv7kompYvXhw9H55?invite=cr-MSxVWmQsNDQ0NjI4Njcy",
+            "percent": 100,
+            "hz": 60
+        }
+    ]
+}
