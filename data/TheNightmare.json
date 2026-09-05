@@ -9,10 +9,10 @@
     "password": "Free to Copy",
     "records": [
         {
-            "user": "",
-            "link": "#",
-            "percent": ,
-            "hz":
+            "user": "1",
+            "link": "1",
+            "percent": 1,
+            "hz": 1
         }
     ]
 }
