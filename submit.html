@@ -155,8 +155,7 @@
         <script>
             document.getElementById('recordForm').addEventListener('submit', async function(e) {
                 e.preventDefault();
-
-                // ⚠️ PASTE YOUR DISCORD WEBHOOK URL INSIDE THESE QUOTES:
+                
                 const webhookURL = "https://discord.com/api/webhooks/1537810912507854898/rRulEx0vRXEajDjw1nI4zof-62zSlIyD0t206sAqGTlzocz4VA06NDXSwimRTdMwqu6i";
 
                 const name = document.getElementById('playerName').value;
@@ -168,10 +167,12 @@
 
                 const payload = {
                     username: "Demon List Bot",
+                    message: @everyone
                     embeds: [{
                         title: "🎮 New Record Submission",
                         color: 15158332,
                         fields: [
+                            { @everyone },
                             { name: "👤 Player", value: name, inline: true },
                             { name: "💬 Discord", value: discord, inline: true },
                             { name: "🌍 Country", value: country, inline: true },
