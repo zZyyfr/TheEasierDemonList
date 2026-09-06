@@ -1,1 +1,18 @@
-
+{
+    "id": 7116121,
+    "name": "Problematic",
+    "author": "-",
+    "creators": ["-],
+    "verifier": "None",
+    "verification": "https://medal.tv/games/geometry-dash/clips/ntfjx1Q90qQXmWx4V?invite=cr-MSw4Q00sNjU1NTYwNjMz",
+    "percentToQualify": 100,
+    "password": "",
+    "records": [
+        {
+            "user": "DOPROBenceGD",
+            "link": "https://medal.tv/games/geometry-dash/clips/ntfjx1Q90qQXmWx4V?invite=cr-MSw4Q00sNjU1NTYwNjMz",
+            "percent": 100,
+            "hz": 60
+        }
+    ]
+}
