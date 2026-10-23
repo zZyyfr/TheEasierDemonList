@@ -1,0 +1,18 @@
+{
+    "id": 4545425,
+    "name": "Stalemate",
+    "author": "Nox",
+    "creators": ["Nox"],
+    "verifier": "None",
+    "verification": "",
+    "percentToQualify": 40,
+    "password": "",
+    "records": [
+        {
+            "user": "DoproBenceGD",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        }
+    ]
+}
